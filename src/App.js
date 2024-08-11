@@ -7,7 +7,7 @@ function escapeRegExp(string) {
 }
 
 const getNegativeNums = (str) => {
-  return (str.match(/-\d+/g) || []).map(Number);
+  return (str.match(/-\d+/g) || "")
 };
 
 function App() {
@@ -64,7 +64,7 @@ function App() {
 
   const calculate = () => {
     try {
-      setError(null); 
+      
       const sum = add(value);
       setResult(sum);
     } catch (err) {
