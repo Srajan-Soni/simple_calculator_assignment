@@ -69,30 +69,30 @@ function App() {
   }
 
   return (
-    <div className="App min-h-screen ">
-      <div className='flex justify-center'>
-        <h1 className='text-blue-500 text-2xl font-bold mt-10'>Simple Calculator</h1>
-      </div>
-
-      <div className="mt-10 flex justify-center item-center">
-        <div className='flex flex-col gap-4 shadow-md p-10'>
+    <div className="App min-h-screen bg-gray-100 flex flex-col justify-center items-center">
+      <h1 className='text-blue-500 text-2xl font-bold  mb-10'>Simple Calculator</h1>
+      
+      <div className="mt-4 md:mt-5 w-full md:w-1/2 flex flex-col justify-center items-center">
+        <h1 className='font-bold text-lg text-center mb-4'>Add the String Values</h1>
+        <div className='flex flex-col gap-4 w-full shadow-lg p-6 md:p-10 bg-white rounded-lg'>
+       
           <Input
             placeholder="Enter Values"
-            className='border border-blue-200 rounded-sm my-2'
+            className='border w-full md:w-3/4 lg:w-1/2 m-auto border-blue-300 rounded-md my-2'
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
-          <Button className='bg-blue-400 hover:bg-blue-500 rounded-sm' onClick={calculate}>
+          <Button className='bg-blue-500 w-1/2 md:w-1/4 m-auto hover:bg-blue-600 rounded-md' onClick={calculate}>
             <p className='font-bold text-white'>Calculate</p>
           </Button>
           {result !== null && (
             <div className='mt-4'>
-              <h2 className='text-xl font-bold'>Result: {result}</h2>
+              <h2 className='text-lg md:text-xl font-bold text-center'>Result: {result}</h2>
             </div>
           )}
           {error && (
             <div className='mt-4 text-red-600'>
-              <h2 className='text-md font-bold'>Error: {error}</h2>
+              <h2 className='text-md md:text-lg font-bold text-center'>Error: {error}</h2>
             </div>
           )}
         </div>
