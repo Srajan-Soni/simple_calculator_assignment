@@ -64,7 +64,7 @@ function App() {
 
   const calculate = () => {
     try {
-      setError(null); 
+      
       const sum = add(value);
       setResult(sum);
     } catch (err) {
