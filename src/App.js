@@ -6,6 +6,10 @@ function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+const getNegativeNums = (str) => {
+  return (str.match(/-\d+/g) || []).map(Number);
+};
+
 function App() {
   const [value, setValue] = useState("");
   const [result, setResult] = useState(null);
@@ -17,51 +21,38 @@ function App() {
     }
   
     let delimiter = /,/; 
-    let normalizedString = numbers;
-  
- 
+
     if (numbers.startsWith("//")) {
       delimiter = new RegExp(escapeRegExp(numbers[2]), 'g'); 
-      normalizedString = numbers.slice(4); 
-    }else{
-
+      numbers = numbers.slice(4); 
     }
+
+    numbers = numbers.replace(/n/g, ''); 
+    numbers = numbers.replace(/\\/g, delimiter.source);
   
-  console.log(normalizedString);
-  
-    normalizedString = normalizedString.replace(/n/g, ''); 
-    normalizedString = normalizedString.replace(/\\/g, delimiter.source);
-  
-    console.log(normalizedString);
-  
-    const numsArr = normalizedString.split(delimiter);
-  
-    console.log(numsArr);
+    const numsArr = numbers.split(delimiter);
   
     let sum = 0;
-    const negativeNumbers = [];
-  
+    let negativeNumbers = [];
+
     for (let num of numsArr) {
       if (num.trim() === "") continue; 
-
+ 
       if(num.includes('-')){
-        let neg = parseInt(num[num.indexOf('-')+1],10);
-        console.log(neg);
-        
-        if(!isNaN(neg))
-          negativeNumbers.push(neg)
+   
+        negativeNumbers.push(getNegativeNums(num))
+
       }
-  
+
       const x = parseInt(num, 10);
-      if (isNaN(x)) continue; 
-  
-      if (x < 0) {
-        negativeNumbers.push(x);
-      } else {
+      if (isNaN(x)) {
+        continue; 
+      }
+      else{
         sum += x;
       }
     }
-    console.log(negativeNumbers);
+    
     
     if (negativeNumbers.length > 0) {
       throw new Error(`Negative numbers not allowed: ${negativeNumbers.join(", ")}`);
@@ -96,7 +87,7 @@ function App() {
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
-          <Button className='bg-blue-400 rounded-sm' onClick={calculate}>
+          <Button className='bg-blue-400 hover:bg-blue-500 rounded-sm' onClick={calculate}>
             <p className='font-bold text-white'>Calculate</p>
           </Button>
           {result !== null && (
