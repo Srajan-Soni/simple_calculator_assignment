@@ -7,7 +7,7 @@ function escapeRegExp(string) {
 }
 
 const getNegativeNums = (str) => {
-  return (str.match(/-\d+/g) || "")
+  return (str.match(/-\d+/g) || []).join('');
 };
 
 function App() {
@@ -38,21 +38,16 @@ function App() {
     for (let num of numsArr) {
       if (num.trim() === "") continue; 
  
-      if(num.includes('-')){
-   
-        negativeNumbers.push(getNegativeNums(num))
-
+      const negativeStr = getNegativeNums(num);
+      if (negativeStr) {
+        negativeNumbers.push(negativeStr);
       }
 
       const x = parseInt(num, 10);
-      if (isNaN(x)) {
-        continue; 
-      }
-      else{
+      if (!isNaN(x)) {
         sum += x;
       }
     }
-    
     
     if (negativeNumbers.length > 0) {
       throw new Error(`Negative numbers not allowed: ${negativeNumbers.join(", ")}`);
@@ -64,7 +59,7 @@ function App() {
 
   const calculate = () => {
     try {
-      
+      setError(null); 
       const sum = add(value);
       setResult(sum);
     } catch (err) {
