@@ -73,13 +73,13 @@ function App() {
   
         <h1 className="text-blue-500 text-2xl mt-5 font-bold text-center">Simple Calculator</h1>
 
-      <main className=" flex flex-col  items-center mt-20">
+      <div className=" flex flex-col  items-center mt-20">
         <div className="w-full md:w-1/3 flex flex-col justify-center items-center">
           <h2 className="font-bold text-lg text-center mb-4">Add the String Values</h2>
           <div className="flex flex-col gap-4 w-full shadow-lg p-6 md:p-10 bg-white rounded-lg">
             <Input
               placeholder="Enter Values"
-              className="border w-full md:w-3/4 lg:w-1/2 m-auto border-blue-300 rounded-md my-2"
+              className="border w-full md:w-1/2 m-auto border-blue-300 rounded-md my-2"
               value={value}
               onChange={(e) => setValue(e.target.value)}
             />
@@ -98,7 +98,7 @@ function App() {
             )}
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
